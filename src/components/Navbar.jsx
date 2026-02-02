@@ -5,6 +5,7 @@ import { auth } from "../firebase/config";
 import { onAuthStateChanged } from "firebase/auth";
 import { ModalsContext } from "../contexts/ModalsContext";
 import { ModalTypes } from "../utils/modalTypes";
+import { faqItems } from "../data/faq";
 
 const Navbar = ({ admin }) => {
   const openModal = useContext(ModalsContext).openModal;
@@ -12,6 +13,9 @@ const Navbar = ({ admin }) => {
   const [user, setUser] = useState("");
   const [authButtonText, setAuthButtonText] = useState("Sign up");
   const [adminButtonText, setAdminButtonText] = useState("Admin");
+  const [showFaq, setShowFaq] = useState(false);
+  const [faqQuery, setFaqQuery] = useState("");
+  const [activeFaqIndex, setActiveFaqIndex] = useState(null);
   const location = useLocation();
 
   useEffect(() => {
@@ -45,10 +49,19 @@ const Navbar = ({ admin }) => {
     }
   };
 
+  const filteredFaqItems = faqItems.filter(({ question, answer }) => {
+    const query = faqQuery.trim().toLowerCase();
+    if (!query) return true;
+    return (
+      question.toLowerCase().includes(query) ||
+      answer.toLowerCase().includes(query)
+    );
+  });
+
   return (
     <nav className="navbar navbar-dark bg-primary">
       <div className="container-fluid">
-        <div className="navbar-brand mb-0 h1 me-auto">
+        <div className="navbar-brand mb-0 h1 me-auto d-flex align-items-center gap-2">
           <img
             src={import.meta.env.BASE_URL + "logo.png"}
             alt="Logo"
@@ -57,6 +70,56 @@ const Navbar = ({ admin }) => {
             className="d-inline-block align-text-top"
           />
           The Markatplace
+          <div
+            className="faq-tab"
+            tabIndex={0}
+            onBlur={(event) => {
+              if (!event.currentTarget.contains(event.relatedTarget)) {
+                setShowFaq(false);
+              }
+            }}
+          >
+            <button
+              type="button"
+              className="btn btn-outline-light btn-sm"
+              onClick={() => setShowFaq((current) => !current)}
+            >
+              FAQ
+            </button>
+            {showFaq && (
+              <div className="faq-panel">
+                <input
+                  className="form-control form-control-sm mb-2"
+                  type="text"
+                  placeholder="Search FAQs"
+                  value={faqQuery}
+                  onChange={(event) => setFaqQuery(event.target.value)}
+                />
+                <div className="faq-results">
+                  {filteredFaqItems.length === 0 ? (
+                    <div className="faq-empty">No matches found.</div>
+                  ) : (
+                    filteredFaqItems.map((item, index) => (
+                      <div key={index} className="faq-item">
+                        <button
+                          type="button"
+                          className="faq-question"
+                          onClick={() =>
+                            setActiveFaqIndex(activeFaqIndex === index ? null : index)
+                          }
+                        >
+                          {item.question}
+                        </button>
+                        {activeFaqIndex === index && (
+                          <div className="faq-answer-popover">{item.answer}</div>
+                        )}
+                      </div>
+                    ))
+                  )}
+                </div>
+              </div>
+            )}
+          </div>
         </div>
         <div className="row row-cols-auto">
           <div className="navbar-brand">{user}</div>
