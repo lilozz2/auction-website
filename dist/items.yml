@@ -127,3 +127,13 @@
   currency: £
   amount: 7
   endTime: 2023-04-25T01:05:00+00:00
+
+- id: 13
+  primaryImage: DALL·E 2023-12-17 17.22.17 - A cat relaxing on a sunny beach, with sunglasses, a sunhat, and a beach ball, surrounded by palm trees, with a clear blue ocean and a bright sky
+  title: The Musician Cat
+  subtitle: Melodic Maestro
+  detail: A passionate cat musician in a tuxedo, performing on a grand piano under a spotlight, captivating the audience with melodic tunes.
+  secondaryImage: DALL·E 2023-12-17 17.22.17 - A cat relaxing on a sunny beach, with sunglasses, a sunhat, and a beach ball, surrounded by palm trees, with a clear blue ocean and a bright sky
+  currency: £
+  amount: 15
+  endTime: 2023-04-25T01:10:00+00
