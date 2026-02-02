@@ -171,7 +171,6 @@ const ItemModal = () => {
           <div className="invalid-feedback">{feedback}</div>
         </div>
         <label className="form-label">Enter {minBid} or more</label>
-        <p className="text-muted">(This is just a demo, you&apos;re not bidding real money)</p>
       </div>
     </Modal>
   );
