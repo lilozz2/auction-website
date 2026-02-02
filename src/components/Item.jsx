@@ -11,12 +11,14 @@ export const Item = ({ item }) => {
   const [primaryImageSrc, setPrimaryImageSrc] = useState("");
   const [bids, setBids] = useState(0);
   const [amount, setAmount] = useState(item.startingPrice);
+  const [startingPrice, setStartingPrice] = useState("");
   const [timeLeft, setTimeLeft] = useState("");
 
   useEffect(() => {
     const status = itemStatus(item);
     setBids(status.bids);
     setAmount(formatMoney(item.currency, status.amount));
+    setStartingPrice(formatMoney(item.currency, item.startingPrice));
   }, [item]);
 
   useEffect(() => {
@@ -53,7 +55,8 @@ export const Item = ({ item }) => {
           <h5 className="title">{item.title}</h5>
           <h6 className="card-subtitle mb-2 text-body-secondary">{item.subtitle}</h6>
         </div>
-        <ul className="list-group list-group-flush">
+          <ul className="list-group list-group-flush">
+          <li className="list-group-item">Starting at {startingPrice}</li>
           {/* <li className="list-group-item"><strong>{amount}</strong></li> */}
           <li className="list-group-item">{bids} bids · {timeLeft}</li>
         </ul>
