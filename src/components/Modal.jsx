@@ -108,20 +108,20 @@ const ItemModal = () => {
     // Get values needed to place bid
     const amount = parseFloat(bid);
     const status = itemStatus(activeItem);
-    // Ensure input is large enough
-    if (amount < status.amount + minIncrease) {
-      setFeedback("You did not bid enough!");
-      setValid("is-invalid");
-      setIsSubmitting(false);
-      return;
-    }
-    // Ensure input is small enough
-    if (amount > status.amount + maxIncrease) {
-      setFeedback(`For the demo you can only increase the price up to ${activeItem.currency}${maxIncrease} per bid.`);
-      setValid("is-invalid");
-      setIsSubmitting(false);
-      return;
-    }
+    // // Ensure input is large enough
+    // if (amount < status.amount + minIncrease) {
+    //   setFeedback("You did not bid enough!");
+    //   setValid("is-invalid");
+    //   setIsSubmitting(false);
+    //   return;
+    // }
+    // // Ensure input is small enough
+    // if (amount > status.amount + maxIncrease) {
+    //   setFeedback(`For the demo you can only increase the price up to ${activeItem.currency}${maxIncrease} per bid.`);
+    //   setValid("is-invalid");
+    //   setIsSubmitting(false);
+    //   return;
+    // }
     // Finally, place bid
     updateDoc(doc(db, "auction", "items"), {
       [formatField(activeItem.id, status.bids + 1)]: {
@@ -170,7 +170,7 @@ const ItemModal = () => {
           </button>
           <div className="invalid-feedback">{feedback}</div>
         </div>
-        <label className="form-label">Enter {minBid} or more</label>
+        {/* <label className="form-label">Enter {minBid} or more</label> */}
       </div>
     </Modal>
   );
