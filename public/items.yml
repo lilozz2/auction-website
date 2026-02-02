@@ -110,10 +110,20 @@
 
 - id: 11
   primaryImage: DALL·E 2023-12-17 17.22.17 - A cat relaxing on a sunny beach, with sunglasses, a sunhat, and a beach ball, surrounded by palm trees, with a clear blue ocean and a bright sky
-  title: The Beach Cat
+  title: The Beach Cat 2
   subtitle: Sandy Serenity
   detail: A relaxed cat enjoying a beach day, equipped with sunglasses and sunhat, beach ball at the ready, surrounded by palm trees and a crystal blue ocean.
   secondaryImage: DALL·E 2023-12-17 17.22.17 - A cat relaxing on a sunny beach, with sunglasses, a sunhat, and a beach ball, surrounded by palm trees, with a clear blue ocean and a bright sky
   currency: £
   amount: 7
   endTime: 2023-04-25T01:00:00+00:00
+
+- id: 12
+  primaryImage: DALL·E 2023-12-17 17.22.17 - A cat relaxing on a sunny beach, with sunglasses, a sunhat, and a beach ball, surrounded by palm trees, with a clear blue ocean and a bright sky
+  title: The Beach Cat 2
+  subtitle: Sandy Serenity 3
+  detail: A relaxed cat enjoyin3 g a beach day, equipped with sunglasses and sunhat, beach ball at the ready, surrounded by palm trees and a crystal blue ocean.
+  secondaryImage: DALL·E 2023-12-17 17.22.17 - A cat relaxing on a sunny beach, with sunglasses, a sunhat, and a beach ball, surrounded by palm trees, with a clear blue ocean and a bright sky
+  currency: £
+  amount: 7
+  endTime: 2023-04-25T01:05:00+00:00

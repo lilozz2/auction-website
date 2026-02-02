@@ -16,7 +16,7 @@ const parseField = (key) => {
       bid: Number(match[2]),
     };
   };
-  
+
 export const unflattenItems = (doc, demo) => {
   let items = {};
   for (const [key, value] of Object.entries(doc.data())) {
@@ -45,7 +45,7 @@ export const unflattenItems = (doc, demo) => {
   }
   return Object.values(items);
 };
-  
+
 export const editItems = (id = undefined, updateItems = false, deleteBids = false) => {
   fetch(import.meta.env.BASE_URL + "items.yml")
     .then((response) => response.text())
@@ -73,14 +73,20 @@ export const editItems = (id = undefined, updateItems = false, deleteBids = fals
             // Convert ISO date into Firestore Timestamp
             newItem.endTime = Timestamp.fromDate(new Date(newItem.endTime));
             // Filter fields to the ones for the current newItem
-            fields
-              .filter((field) => parseField(field).item === newItem.id)
-              .forEach((field) => {
+            const matchingFields = fields.filter((field) => parseField(field).item === newItem.id);
+
+            // If no matching fields exist for this item, create the base field
+            if (matchingFields.length === 0 && updateItems) {
+              const newField = formatField(newItem.id, 0);
+              updates[newField] = newItem;
+            } else {
+              matchingFields.forEach((field) => {
                 if (updateItems && parseField(field).bid === 0)
                   updates[field] = newItem;
                 if (deleteBids && parseField(field).bid)
                   updates[field] = deleteField();
               });
+            }
           });
           return updates;
         })
@@ -90,4 +96,3 @@ export const editItems = (id = undefined, updateItems = false, deleteBids = fals
         });
     });
 };
-  
